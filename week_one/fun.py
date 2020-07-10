@@ -1,4 +1,6 @@
+import test
 ## Data Types
+
 
 #number
 num = 10
@@ -67,7 +69,7 @@ for whatever in post:
 # for(let i =0; i<250; i++){
 # }
 
-for i in range(len(students)):
+for i in range(0, 100, 1):
     print(f"This is the index: {i}, this is the value: {students[i]}")
 
 def print_name_return_ten(name):
