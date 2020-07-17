@@ -3,9 +3,10 @@
 # eg. "User: Guido van Rossum, Balance: $150
 # BONUS: transfer_money(self, other_user, amount) - have this method decrease the user's balance by the amount and add that amount to other other_user's balance
 class BankAccount:
-    def __init__(self, int_rate, balance):
+    def __init__(self, int_rate, balance, b_type):
         self.account_balance = balance
         self.int_rate = int_rate
+        self.type = b_type
     def deposit(self, amount):
         self.account_balance += amount
         return self
@@ -16,7 +17,7 @@ class BankAccount:
         self.account_balance -= amount
         return self
     def display_account_info(self):
-        print(f"Current balance: {self.account_balance}")
+        print(f"Current balance in {self.type}s: {self.account_balance}")
         return self
     def yield_interest(self):
         amount_earned = self.account_balance * self.int_rate
@@ -27,7 +28,10 @@ class BankAccount:
 class User:
     def __init__(self, name, int_rate, balance):
         self.name = name
-        self.account = BankAccount(int_rate, balance)
+        self.accounts = {'checking':BankAccount(int_rate, balance, 'checking')}
+    def create_account(self, int_rate, balance, b_type):
+        self.accounts[b_type] = BankAccount(int_rate, balance, b_type)
+        return self
     # def make_withdrawal(self, amount):
     #     self.account.account_balance -= amount
     #     return amount
@@ -40,8 +44,10 @@ class User:
     #     return self
 
 sean = User("Sean", .02, 1000)
-
 liz = User("Elizabeth", .05, 500)
+liz.create_account(.04, 200, 'saving')
+liz.accounts['checking'].display_account_info()
+liz.accounts['saving'].display_account_info()
 
 # sean.account_balance += 1000
 
