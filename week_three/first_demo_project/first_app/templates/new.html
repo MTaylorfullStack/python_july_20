@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Post</title>
+</head>
+<body>
+    <h1>Please make a post!</h1>
+    <form action="/create" method="POST">
+        {% csrf_token %}
+        Blog Post: <input type="text" name='b_post'>
+        Poster Name: <input type="text" name='p_name'>
+        Poster Email: <input type='text' name='p_email'>
+        <input type="submit">
+    </form>
+    
+</body>
+</html>
