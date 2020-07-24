@@ -7,21 +7,11 @@
     <title>War Game</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'style.css' %}">
-    <style>
-        h1 {
-            background-color: {{request.session.color}};
-            padding: 50px;
-        }
-        img{
-            width: 25px;
-            display: inline-block;
-        }
-    </style>
 </head>
 <body>
     <div id="wrapper">
         <!-- personalized greeting / theme -->
-        <h1>Welcome, at your service General {{request.session.name}}</h1>
+        <h1 style="background-color: {{request.session.color}};">Welcome, at your service General {{request.session.name}}</h1>
         <!-- current number of soldiers -->
         <h2>Number of soldiers: {{request.session.army}}</h2>
         {% for man in request.session.army_men %}

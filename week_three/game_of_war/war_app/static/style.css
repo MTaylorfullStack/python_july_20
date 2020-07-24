@@ -4,3 +4,12 @@
     text-align: center;
 }
 
+h1 {
+    padding: 50px;
+}
+
+img{
+    width: 25px;
+    display: inline-block;
+}
+
