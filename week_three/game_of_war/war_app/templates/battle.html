@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battle</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    
+    <div id="wrapper">
+
+    <!-- Display all of our army -->
+        <div class="army">
+        <h1 style="background-color: {{request.session.color}};">Your Forces:</h1>
+            {% for man in request.session.army_men %}
+            <img src="{% static 'army_man.jpeg' %}" />
+            {% endfor %}
+        </div>
+
+    <!-- Display enemy army -->
+        <div class="army">
+        <h1 style="background-color: red;">Enemy Forces:</h1>
+            {% for unit in enemy %}
+            <img src="{% static 'army_man.jpeg' %}" />
+            {% endfor %}
+        </div>
+
+        <!-- Provide option to battle -->
+        <br>
+        <a href="/march_into_battle/{{randy}}">March into Battle!</a>
+
+    </div>
+
+</body>
+
+</html>

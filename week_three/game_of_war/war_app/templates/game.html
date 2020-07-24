@@ -12,14 +12,20 @@
     <div id="wrapper">
         <!-- personalized greeting / theme -->
         <h1 style="background-color: {{request.session.color}};">Welcome, at your service General {{request.session.name}}</h1>
+        <div class='actions'>
+            <a style="background-color: {{request.session.color}};" href="/add_soldier">Add Soldier to Army!</a>
+            <a style="background-color: {{request.session.color}};" href="/begin_battle">Go to Battle!</a>
+        </div>
         <!-- current number of soldiers -->
         <h2>Number of soldiers: {{request.session.army}}</h2>
         {% for man in request.session.army_men %}
         <img src="{% static 'army_man.jpeg' %}" />
         {% endfor %}
         <!-- button for adding soldiers -->
-        <a href="/add_soldier">Add Soldier to Army!</a>
-        <a href="/battle">Go to Battle!</a>
+        <h2>Activity Log:</h2>
+        {% for activity in request.session.activity_log %}
+    <p style="color: {{request.session.color}};">{{activity}}</p>
+        {% endfor %}
     </div>
 </body>
 
