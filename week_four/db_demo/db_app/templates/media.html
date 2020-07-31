@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Media Page</title>
+    <style>
+        #wrapper{
+            width: 900px;
+            font-family: sans-serif;
+            margin: 0px auto;
+        }
+        .message{
+            background-color: aqua;
+            text-align: center;
+            padding: 10px;
+            margin: 25px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+    <h1>{{request.session.name}} has successfully logged in!</h1>
+    
+    <form action="/create_mess" method=POST>
+        {% csrf_token %}
+        <input type="text" name="mess_content">
+        <input type="submit" value="Post Message">
+    </form>
+
+    {% for message in all_messages reversed%}
+    <div class="message">
+        <a href="/profile/{{message.poster.id}}"><h2>{{message.poster.username}}</h2></a>
+        <p>{{message.content}}</p>
+        <p>{{message.created_at}}</p>
+    </div>
+    {% endfor %}
+    </div>
+    
+</body>
+</html>

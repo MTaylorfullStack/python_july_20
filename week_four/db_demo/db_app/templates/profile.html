@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body>
+    <h1>You are on {{one_user.username}}'s page</h1>
+
+    <h2>Their posts: </h2>
+    {% for post in one_user.posts.all %}
+    <div class="message">
+        <p>{{post.content}}</p>
+        <p>{{post.created_at}}</p>
+    </div>
+    {% endfor %}
+    
+</body>
+</html>

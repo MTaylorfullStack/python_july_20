@@ -3,9 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DB Test</title>
+    <title>Message Blog</title>
+    <style>
+        #wrapper{
+            width: 900px;
+            font-family: sans-serif;
+            margin: 0px auto;
+        }
+        .form{
+            display: inline-block;
+            margin: 100px;
+        }
+        input{
+            display: block;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Your project is good to go!</h1>
+    <div id="wrapper">
+
+    <h1>Welcome to the Message Blog, please log in or register</h1>
+    <div class="form">
+    <h2>Register:</h2>
+    <form action="/register" method=POST>
+        {% csrf_token %}
+        Name:<input type="text" name="name">
+        Pw:<input type="text" name="pw">
+        <input type="submit" value="Register!">
+    </form>
+    </div>
+
+    <div class="form">
+    <h2>Login:</h2>
+    <form action="/login" method=POST>
+        {% csrf_token %}
+        Name:<input type="text" name="name">
+        Pw:<input type="text" name="pw">
+        <input type="submit" value="Login!">
+    </form>
+    </div>
+
+    </div>
+
 </body>
 </html>

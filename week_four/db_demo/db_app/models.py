@@ -2,7 +2,6 @@ from django.db import models
 
 # -   Create a User table!
 #     -   Users have usernames, passwords, created_at and updated_at
-
 class User(models.Model):
     username = models.CharField(max_length = 255)
     password = models.CharField(max_length = 255)
