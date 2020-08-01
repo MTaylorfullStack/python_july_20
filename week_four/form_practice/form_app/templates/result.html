@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Gold</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <div id="wrapper">
+        <h1>Welcome, {{request.session.name}}, to Ninja Gold!</h1>
+        <p>Earn money to win</p>
+        <h6>Current Gold: {{request.session.gold}}</h6>
+
+        <div id="forms">
+            
+            <div class="form">
+                <h4>Farm</h4>
+                <p>Earns 10-20 gold</p>
+                <form action="/process_money" method=POST>
+                    {% csrf_token %}
+                    <input type="hidden" name="farm">
+                    <input type="submit" value="Find Gold!">
+                </form>
+            </div>
+
+            <div class="form">
+                <h4>Cave</h4>
+                <p>Earns 5-10 gold</p>
+                <form action="/process_money" method=POST>
+                    {% csrf_token %}
+                    <input type="hidden" name="cave">
+                    <input type="submit" value="Find Gold!">
+                </form>
+            </div>
+
+            <div class="form">
+                <h4>House</h4>
+                <p>Earns 2-5 gold</p>
+                <form action="/process_money" method=POST>
+                    {% csrf_token %}
+                    <input type="hidden" name="house">
+                    <input type="submit" value="Find Gold!">
+                </form>
+            </div>
+
+            <div class="form">
+                <h4>Casino</h4>
+                <p>Earns/Loses 50 gold</p>
+                <form action="/process_money" method=POST>
+                    {% csrf_token %}
+                    <input type="hidden" name="casino">
+                    <input type="submit" value="Find Gold!">
+                </form>
+            </div>
+
+
+        </div>
+        
+
+
+
+        <a href="/reset">Reset</a>
+    </div>
+</body>
+
+</html>

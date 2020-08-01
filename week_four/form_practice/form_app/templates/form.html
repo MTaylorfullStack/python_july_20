@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div id="wrapper">
+        <form action="/process" method=POST>
+            {% csrf_token %}
+            <h4>Name:</h4>
+            <input type="text" name="user_name">
+            <h4>Location:</h4>
+            <select name="location">
+                <option value="san_jose">San Jose</option>
+                <option value="chicago">Chicago</option>
+                <option value="oakland">Oakland</option>
+                <option value="seattle">Seattle</option>
+            </select>
+            <h4>Favorite Language:</h4>
+            <select name="fav_lang">
+                <option value="python">Python</option>
+                <option value="c#">C#</option>
+                <option value="Java">Java</option>
+                <option value="JavaScript">JavaScript</option>
+            </select>
+            <h4>Comment:</h4>
+            <textarea name="comment" cols="30" rows="10"></textarea><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    
+</body>
+</html>
