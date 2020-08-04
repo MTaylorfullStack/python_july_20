@@ -16,6 +16,7 @@ def create(request):
     print(request.POST['b_post'])
     request.session['blog_post'] = request.POST['b_post']
     request.session['first_name'] = request.POST['p_name']
+    request.session['number'] = 100
     return redirect('/')
 
 def show(request, number):

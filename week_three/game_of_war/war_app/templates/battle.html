@@ -24,7 +24,7 @@
     <!-- Display enemy army -->
         <div class="army">
         <h1 style="background-color: red;">Enemy Forces:</h1>
-            {% for unit in enemy %}
+            {% for unit in request.session.enemy %}
             <img src="{% static 'army_man.jpeg' %}" />
             {% endfor %}
         </div>

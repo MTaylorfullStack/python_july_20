@@ -9,6 +9,9 @@
     <h1>Welcome to my Blog</h1>
     <h2>This is a placeholder for future blog posts</h2>
     <a href="/new">Make a new post</a>
+    {% for x in request.session.number %}
+    <p>{{x}}</p>
+    {% endfor %}
 
     {{request.session.blog_post}}
     {{request.session.first_name}}

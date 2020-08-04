@@ -37,7 +37,7 @@ def add(request):
     # add a soldier to army, increase counter
     log_activity(1, None, request.session['activity_log'], request.session['name'])
     request.session['army'] += 1
-    request.session['army_men'].append(0)
+    request.session['army_men'].append(int(random.random()*10))
     print(request.session['activity_log'])
     return redirect('/war')
 
@@ -57,7 +57,7 @@ def battle(request):
         difference = request.session['army'] - randy
         request.session['army'] += difference
         for num in range(difference):
-            request.session['army_men'].append(0)
+            request.session['army_men'].append(int(random.random()*10))
         log_activity(difference, "won", request.session['activity_log'], request.session['name'])
     # army gains army - randy troops
     # return redirect back to game
@@ -68,27 +68,55 @@ def begin(request):
     # generate the enemy army
     randy = int(random.random() * request.session['army'] * 2)
     # render a page where we display units of enemy army and our army
-    enemy = []
+    request.session['enemy'] = []
     for member in range(randy):
-        enemy.append(member)
+        request.session['enemy'].append(int(random.random()*10))
     context = {
-        'enemy':enemy,
         'randy': randy
     }
     return render(request, "battle.html", context)
 
 def march(request, randy):
     result = int(random.random() * 10)
-    if result > 5:
-        difference = randy - request.session['army']
-        request.session['army'] -= difference
-        for num in range(difference):
-            request.session['army_men'].pop()
-        log_activity(difference, "lost", request.session['activity_log'], request.session['name'])
+    print(request.session['army'], "This is the player's army")
+    print(request.session['army_men'], "this is the my army list")
+    print(randy, "Number of units in enemy army")
+    print(request.session['enemy'], "enemy army list")
+    ## find the sum of two arrays using a single for loop
+    if request.session['army'] > randy:
+        larger = request.session['army_men']
+        smaller = request.session['enemy']
+        big = True
     else:
-        difference = request.session['army'] - randy
-        request.session['army'] += difference
-        for num in range(difference):
-            request.session['army_men'].append(0)
-        log_activity(difference, "won", request.session['activity_log'], request.session['name'])
+        larger = request.session['enemy']
+        smaller = request.session['army_men']
+        big = False
+    player_score = 0
+    enemy_score = 0
+    for i in range(len(larger)):
+        if big:
+            player_score += larger[i]
+            if i < len(smaller):
+                enemy_score += smaller[i]
+        else:
+            enemy_score += larger[i]
+            if i < len(smaller):
+                player_score += smaller[i]
+    print(player_score, "this is my player score", enemy_score, "this is my enemy score")
+    if player_score > enemy_score:
+        log_activity(10, "won", request.session['activity_log'], request.session['name'])
+    else:
+        log_activity(10, "lost", request.session['activity_log'], request.session['name'])
+    # if result > 5:
+    #     difference = randy - request.session['army']
+    #     request.session['army'] -= difference
+    #     for num in range(difference):
+    #         request.session['army_men'].pop()
+    #     log_activity(difference, "lost", request.session['activity_log'], request.session['name'])
+    # else:
+    #     difference = request.session['army'] - randy
+    #     request.session['army'] += difference
+    #     for num in range(difference):
+    #         request.session['army_men'].append(0)
+    #     log_activity(difference, "won", request.session['activity_log'], request.session['name'])
     return redirect('/war')
