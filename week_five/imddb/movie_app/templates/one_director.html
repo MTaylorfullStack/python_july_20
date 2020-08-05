@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Director</title>
+</head>
+<body>
+    <h1>You are viewing {{director.name}}'s page</h1>
+
+    <h2>Some of their work:</h2>
+    <ul>
+        {% for movie in director.movies.all %}
+        <li>{{movie.title}}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="/director/delete/{{director.id}}">Delete Director</a>
+    <h3>Edit Director Info:</h3>
+    <form action="/director/edit/{{director.id}}" method=POST>
+        {% csrf_token %}
+        <input type="text" name="name">
+        <input type="submit" value="Edit Director">
+    </form>
+
+    <p>{{director.created_at}}</p>
+
+    
+</body>
+</html>

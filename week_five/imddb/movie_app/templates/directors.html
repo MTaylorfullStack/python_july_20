@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directors</title>
+</head>
+<body>
+    <h2>Add Director:</h2>
+    <form action="/add_director" method='POST'>
+        {% csrf_token %}
+        <input type="text" name="name">
+        <input type="submit" value="Add Director">
+    </form>
+    <h1>These are our Directors:</h1>
+    <table>
+        <tr>
+            <th>Director Name</th>
+            <th>Movies</th>
+        </tr>
+        {% for director in all_directors %}
+        <tr>
+            <td><a href="/director/{{director.id}}">{{director.name}}</a></td>
+            {% for movie in director.movies.all %}
+            <td>{{movie.title}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    
+</body>
+</html>
