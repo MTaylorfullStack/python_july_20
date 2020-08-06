@@ -28,7 +28,7 @@
         </tr>
         {% for movie in all_movies %}
         <tr>
-            <td>{{movie.title}}</td>
+            <td><a href="movie/delete/{{movie.id}}">{{movie.title}}</a></td>
             <td>{{movie.description}}</td>
             <td>{{movie.director.name}}</td>
         </tr>

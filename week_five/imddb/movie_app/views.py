@@ -49,7 +49,8 @@ def delete_director(request, id):
     return redirect('/directors')
 
 def delete_movie(request, id):
-    return HttpResponse(f"Placeholder route delete movie {id}")
+    Movie.objects.get(id=id).delete()
+    return redirect('/movies')
 
 ## Methods for db instance edits
 
