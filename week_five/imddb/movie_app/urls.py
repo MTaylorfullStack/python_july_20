@@ -5,6 +5,7 @@ urlpatterns = [
     path('', views.index),
     path('directors', views.directors),
     path('add_director', views.add_director),
+    path('add_actor', views.add_actor),
     path('movies', views.movies),
     path('add_movie', views.add_movie),
     path('director/<int:id>', views.one_director),
@@ -13,5 +14,6 @@ urlpatterns = [
     path('movie/delete/<int:id>', views.delete_movie),
     path('director/edit/<int:id>', views.edit_director),
     path('movie/edit/<int:id>', views.edit_movie),
-    path('actors', views.actors)
+    path('actors', views.actors),
+    path('add_actor/<int:id>', views.add_actor_to_movie)
 ]

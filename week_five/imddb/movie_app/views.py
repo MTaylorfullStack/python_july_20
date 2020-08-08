@@ -38,7 +38,13 @@ def one_director(request, id):
     return render(request, "one_director.html", context)
 
 def one_movie(request, id):
-    return HttpResponse(f"Placeholder to display movie with id {id}")
+    # grab an instance a movie
+    context = {
+        'one_movie': Movie.objects.get(id=id),
+        'all_actors': Actor.objects.all()
+    }
+    # display this movie on some one_movie.html
+    return render(request, "one_movie.html", context)
 
 ## Methods for db instance deletion
 
@@ -66,7 +72,14 @@ def edit_director(request, id):
     return HttpResponse(f"Placeholder to edit director {id}")
 
 def edit_movie(request, id):
-    return HttpResponse(f"Placeholder to edit movie {id}")
+    # retrieve this movie
+    edit_movie = Movie.objects.get(id=id)
+    # edit this movies data
+    edit_movie.title = request.POST['title']
+    # save our edit
+    edit_movie.save()
+    # redirect to some page where we can view updated data
+    return redirect(f'/movie/{id}')
 
 ## Methods for creating DB data
 
@@ -83,3 +96,17 @@ def add_movie(request):
         Movie.objects.create(title=request.POST['title'], description=request.POST['description'], director=Director.objects.get(id=request.POST['director']))
         return redirect('/movies')
     return redirect('/')
+
+def add_actor(request):
+    if request.method == 'POST':
+        Actor.objects.create(name=request.POST['name'])
+        return redirect('/')
+    return redirect('/')
+
+## Many-To-Many
+
+def add_actor_to_movie(request, id):
+    movie = Movie.objects.get(id=id)
+    actor = Actor.objects.get(id=request.POST['actor'])
+    actor.movies.add(movie)
+    return redirect('/movies')

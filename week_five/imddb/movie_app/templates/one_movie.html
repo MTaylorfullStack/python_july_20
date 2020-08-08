@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Movie</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <div id="wrapper">
+        <h1>{{one_movie.title}}</h1>
+        <h3>Directed by {{one_movie.director.name}}</h3>
+        <p>{{one_movie.description}}</p>
+
+
+        <h2>Add Actors to Movie:</h2>
+        <form action="/add_actor/{{one_movie.id}}" method=POST>
+            {% csrf_token %}
+            <select name="actor">
+                {% for actor in all_actors %}
+                <option value="{{actor.id}}">{{actor.name}}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Add Actor To Movie">
+        </form>
+
+
+        <h2>Edit Movie Title:</h2>
+        <form action="/movie/edit/{{one_movie.id}}" method=POST>
+            {% csrf_token %}
+            <input type="text" name="title">
+            <input type="submit" value="Edit Title">
+        </form>
+        <a href="/movie/delete/{{one_movie.id}}">Delete Movie</a>
+    </div>
+
+</body>
+
+</html>

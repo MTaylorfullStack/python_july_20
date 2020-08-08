@@ -1,39 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'content.css' %}">
 </head>
+
 <body>
-    <h2>Add Movie:</h2>
-    <form action="/add_movie" method='POST'>
-        {% csrf_token %}
-        <input type="text" name="title">
-        <input type="text" name="description">
-        <select name="director">
-            {% for director in all_directors %}
-            <option value="{{director.id}}">{{director.name}}</option>
-            {% endfor %}
-        </select>
-        <input type="submit" value="Add movie">
-    </form>
-    <h1>These are our Movies:</h1>
-    
-    <table>
-        <tr>
-            <th>Movie Title</th>
-            <th>Description</th>
-            <th>Director</th>
-        </tr>
-        {% for movie in all_movies %}
-        <tr>
-            <td><a href="movie/delete/{{movie.id}}">{{movie.title}}</a></td>
-            <td>{{movie.description}}</td>
-            <td>{{movie.director.name}}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    
+    <div id="wrapper">
+        <a href="/">Home</a>
+        <a href="/directors">Directors</a>
+
+        <div class="main_content">
+            <h2>Add Movie:</h2>
+            <form action="/add_movie" method='POST'>
+                {% csrf_token %}
+                <p>Title:</p>
+                <input type="text" name="title">
+                <p>Description:</p>
+                <input type="text" name="description">
+                <p>Director:</p>
+                <select name="director">
+                    {% for director in all_directors %}
+                    <option value="{{director.id}}">{{director.name}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <input type="submit" value="Add movie">
+            </form>
+        </div>
+
+
+        <div class="main_content">
+            <h1>These are our Movies:</h1>
+            <table>
+                <tr>
+                    <th>Movie Title</th>
+                    <th>Description</th>
+                    <th>Director</th>
+                    <th>Actors</th>
+                </tr>
+                {% for movie in all_movies %}
+                <tr>
+                    <td><a href="movie/{{movie.id}}">{{movie.title}}</a></td>
+                    <td>{{movie.description}}</td>
+                    <td>{{movie.director.name}}</td>
+                    <td>
+                        {% for actor in movie.actors.all %}
+                        {{actor.name}},
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
 </body>
+
 </html>
