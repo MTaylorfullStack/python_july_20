@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log and Reg</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <div id="header">
+            <h1 class='subhead'>Welcome! Please sign in to access the message wall.</h1>
+            <p class='subhead'>If this is your first time in, please register!</p>
+        </div>
+
+        <div id="forms">
+
+            <div class="form">
+                <h4>Sign In</h4>
+                <form action="/login" method="post">
+                    {% csrf_token %}
+                    <p>Email</p>
+                    <input type="text" name="email">
+                    <p>Password</p>
+                    <input type="text" name="password">
+                    <input class='submit' type="submit" value="Login">
+                </form>
+            </div>
+
+
+            <div class="form">
+                <h4>Register</h4>
+                <form action="/register" method="post">
+                    {% csrf_token %}
+                    <p>First Name</p>
+                    <input type="text" name="f_name">
+                    <p>Last Name</p>
+                    <input type="text" name="l_name">
+                    <p>Email</p>
+                    <input type="text" name="email">
+                    <p>Password</p>
+                    <input type="text" name="password">
+                    <p>Confirm Password</p>
+                    <input type="text" name="conf_password">
+                    <input class='submit' type="submit" value="Register">
+                </form>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
