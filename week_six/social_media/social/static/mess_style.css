@@ -1,0 +1,28 @@
+#mess_form{
+    margin-left: 500px;
+    background-color: burlywood;
+    text-align: center;
+    padding: 15px;
+    margin: 25px;
+    width: 500px;
+    margin-left: 350px;
+}
+
+
+.submit{
+    display: block;
+    margin-top: 5px;
+    margin-left: 225px;
+}
+
+#messages{
+    background-color: burlywood;
+    padding: 25px;
+}
+
+.message{
+    background-color: aqua;
+    text-align: center;
+    margin: 25px;
+    padding: 25px;
+}

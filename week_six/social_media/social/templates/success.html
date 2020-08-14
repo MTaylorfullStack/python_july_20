@@ -1,12 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Success!</title>
+    <title>Message Wall</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'mess_style.css' %}">
 </head>
+
 <body>
-    <h1>Congrats! {{request.session.name}} has successfully signed in.</h1>
-    
+    <div id="wrapper">
+
+        <div id="header">
+        <h1>Congrats! Welcome to {{request.session.name}} message wall!</h1>
+        <h2>Post a Message:</h2>
+        <a href="/logout">logout</a>
+        </div>
+        
+        <form id='mess_form' action="/create_message" method=POST>
+            {% csrf_token %}
+            <textarea rows="4" cols="50" name="content"></textarea>
+            <input class='submit' type="submit" value="Post">
+        </form>
+
+        <div id="messages">
+            {% for one_mess in all_messages %}
+            <div class="message">
+                <h6><a href="/profile/{{one_mess.poster.id}}">{{one_mess.poster.first_name}} {{one_mess.poster.last_name}}</a></h6>
+                <p>{{one_mess.content}}</p>
+                <p>{{one_mess.created_at}}</p>
+                {% if request.session.user_id == one_mess.poster.id %}
+                <p><a href="/edit/{{one_mess.id}}">Edit</a> <a href="/delete/{{one_mess.id}}">Delete</a></p>
+                {% endif %}
+                <a href="/like/{{one_mess.id}}">Like</a>
+                <p>Likes: {{one_mess.likes.count}}</p>
+                <h6>Leave a Comment:</h6>
+                <form action="/add_comment/{{one_mess.id}}" method=POST>
+                    {% csrf_token %}
+                    <input type="text" name='content'>
+                    <input type="submit" value="Add Comment">
+                </form>
+                <h6>Comments:</h6>
+                {% for one_comm in one_mess.comments.all %}
+                <p>{{one_comm.content}}</p><br>
+                <p>Posted on {{one_comm.created_at}}</p>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </body>
+
 </html>

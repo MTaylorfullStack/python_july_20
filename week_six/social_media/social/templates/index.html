@@ -12,6 +12,14 @@
 <body>
     <div id="wrapper">
 
+        {% if messages %}
+        <ul>
+        {% for message in messages %}
+        <li>{{message}}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+
         <div id="header">
             <h1 class='subhead'>Welcome! Please sign in to access the message wall.</h1>
             <p class='subhead'>If this is your first time in, please register!</p>
@@ -37,11 +45,11 @@
                 <form action="/register" method="post">
                     {% csrf_token %}
                     <p>First Name</p>
-                    <input type="text" name="f_name">
+                    <input type="text" name="f_name" required>
                     <p>Last Name</p>
-                    <input type="text" name="l_name">
+                    <input type="text" name="l_name" required>
                     <p>Email</p>
-                    <input type="text" name="email">
+                    <input type="text" name="email" required>
                     <p>Password</p>
                     <input type="text" name="password">
                     <p>Confirm Password</p>
