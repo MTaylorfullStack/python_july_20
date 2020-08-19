@@ -124,3 +124,21 @@ def add_like(request, id):
     user_liking = User.objects.get(id=request.session['user_id'])
     liked_message.likes.add(user_liking)
     return redirect('/success')
+
+def edit_comm(request, id):
+    if request.method == 'POST':
+        # get the comment that is going to be edited
+        edit_comm = Comment.objects.get(id=id)
+        # change necessary fields
+        edit_comm.content = request.POST['content']
+        # save changes
+        edit_comm.save()
+        return redirect('/success')
+    context = {
+        'comm': Comment.objects.get(id=id)
+    }
+    return render(request, 'comm_edit.html', context)
+    
+def delete_comm(request, id):
+    Comment.objects.get(id=id).delete()
+    return redirect('/success')

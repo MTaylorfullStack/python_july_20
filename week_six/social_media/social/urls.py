@@ -14,4 +14,6 @@ urlpatterns = [
     path('delete/<int:id>', views.delete_mess),
     path('add_comment/<int:id>', views.add_comm),
     path('like/<int:id>', views.add_like),
+    path('comm_edit/<int:id>', views.edit_comm),
+    path('comm_delete/<int:id>', views.delete_comm)
 ]

@@ -14,7 +14,7 @@
     <div id="wrapper">
 
         <div id="header">
-        <h1>Congrats! Welcome to {{request.session.name}} message wall!</h1>
+        <h1>Congrats! Welcome to {{request.session.name}}'s message wall!</h1>
         <h2>Post a Message:</h2>
         <a href="/logout">logout</a>
         </div>
@@ -46,6 +46,9 @@
                 {% for one_comm in one_mess.comments.all %}
                 <p>{{one_comm.content}}</p><br>
                 <p>Posted on {{one_comm.created_at}}</p>
+                {% if request.session.user_id == one_comm.poster.id %}
+                <p><a href="/comm_edit/{{one_comm.id}}">Edit</a> <a href="/comm_delete/{{one_comm.id}}">Delete</a></p>
+                {% endif %}
                 {% endfor %}
             </div>
             {% endfor %}
