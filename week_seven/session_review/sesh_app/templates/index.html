@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session</title>
+</head>
+<body>
+    <h1>Let's play with some session</h1>
+    <a href="/reset">Reset Session</a>
+    <a href="/start_game">Start</a>
+
+    <form action="/process" method=POST>
+        {% csrf_token %}
+        <input type="text" name="username">
+        <input type="submit" value="Track User">
+    </form>
+
+    <h2>{{request.session.user_list}}</h2>
+</body>
+</html>
