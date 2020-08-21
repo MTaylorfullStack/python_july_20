@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Org</title>
+    <style>
+        #wrapper{
+            margin: 0px auto;
+            width: 1200px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="head">
+            <h1>{{one_org.name}}</h1>
+            {% if user in one_org.members.all %}
+            <a href="/leave/{{one_org.id}}">Leave Group</a>
+            {% else %}
+            <a href="/join/{{one_org.id}}">Join Group</a>
+            {% endif %}
+            <h6>{{one_org.description}}</h6>
+        </div>
+        <h3>Creator:</h3>
+        <h4>{{one_org.creator.first_name}} {{one_org.creator.last_name}}</h4>
+        <h3>Members:</h3>
+        <ul>
+            {% for member in one_org.members.all %}
+            <li>{{member.first_name}} {{member.last_name}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+</body>
+</html>

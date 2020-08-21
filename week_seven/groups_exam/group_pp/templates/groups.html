@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groups</title>
+    <style>
+        #wrapper{
+            margin: 0px auto;
+            width: 1200px;
+        }
+        .orgs{
+            display: inline-block;
+            vertical-align: top;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="head">
+            <h1>Welcome, {{request.session.name}}</h1>
+            <h3>Here are the organizations you may join:</h3>
+        </div>
+        <div id="main_content">
+            <div class="orgs">
+                {% for org in all_orgs %}
+                <a href="/groups/{{ org.id }}"><h4>{{org.name}}</h4></a>
+                <p>Members: {{org.members.count}}</p>
+                <p>{{org.description}}</p>
+                {% endfor %}
+            </div>
+            <div class="orgs">
+                <h5>Create a new Organization:</h5>
+                <form action="/create_org" method=POST>
+                    {% csrf_token %}
+                    <p>Name:</p>
+                    <input type="text" name="org_name">
+                    <p>Decsription:</p>
+                    <textarea name="description" cols="30" rows="10">Description...</textarea>
+                    <input type="submit" value="Create Org">
+                </form>
+            </div>
+        </div>
+
+    </div>
+    
+</body>
+</html>
