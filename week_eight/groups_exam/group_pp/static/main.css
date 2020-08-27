@@ -1,0 +1,42 @@
+#wrapper {
+    margin: 0px auto;
+    width: 1200px;
+    font-family: sans-serif;
+    width: 950px;
+}
+
+#head{
+    text-align: center;
+}
+
+.form{
+    display: inline-block;
+    vertical-align: top;
+    border: 10px solid black;
+    padding: 75px;
+    margin: 50px;
+    height: 375px;
+}
+
+.sub{
+    display: block;
+    margin: 30px;
+}
+
+.orgs {
+    display: inline-block;
+    vertical-align: top;
+    border: 10px solid black;
+    padding: 50px;
+    margin: 10px;
+    width: 325px;
+}
+
+.details{
+    display: inline-block;
+    vertical-align: top;
+    border: 10px solid black;
+    padding: 75px;
+    margin: 50px;
+    height: 375px;
+}

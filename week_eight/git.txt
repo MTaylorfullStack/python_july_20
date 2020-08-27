@@ -1,0 +1,11 @@
+
+    // initializing local repository
+git init
+    // adding all of our files to the local repository
+git add .
+    // saving state of our local repository
+git commit -m "first commit"
+    // adding origin, this is where remote repository will be hosted
+git remote add origin https://github.com/MTaylorfullStack/my_repo.git
+    // push local repository to origin (remote)
+git push -u origin master

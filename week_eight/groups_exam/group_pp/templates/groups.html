@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groups</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="head">
+            <h1>Welcome, {{request.session.name}}</h1>
+            <h3>Browse Organizations, or Add Your Own!</h3>
+            <a href="/logout">Logout</a>
+        </div>
+        <div id="main_content">
+            <div class="orgs">
+                <h5>Organizations you may join:</h5>
+                {% for org in all_orgs reversed %}
+                <a href="/groups/{{ org.id }}">
+                    <h4>{{org.name}}</h4>
+                </a>
+                <p>Members: {{org.members.count}}</p>
+                <p>{{org.description}}</p>
+                {% endfor %}
+            </div>
+            <div class="orgs">
+                <h5>Create a new Organization:</h5>
+                <form action="/create_org" method=POST>
+                    {% csrf_token %}
+                    <p>Name:</p>
+                    <input type="text" name="org_name" required>
+                    <p>Description:</p>
+                    <textarea name="description" cols="30" rows="10">Description...</textarea>
+                    <input type="submit" value="Create Org">
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    // $('#head').click(function(){
+    //     console.log("You AJAX is working")
+    // })
+        $('form').submit(function(r) {
+            // preventing default, prevents server request/page from refreshing
+            r.preventDefault();
+            console.log($(this).serialize(), "this is what 'this' is")
+            $.ajax({
+                url: '/create_org',
+                method: 'post',
+                data: $(this).serialize(),
+                success: function(serverResponse) {
+                    console.log(serverResponse);
+                    // update the dom
+                    $('#wrapper').html(serverResponse);
+                }
+            })
+        })
+</script>
+</html>

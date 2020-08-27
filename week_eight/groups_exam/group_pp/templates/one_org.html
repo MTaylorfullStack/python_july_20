@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Org</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="head">
+            <h1>{{one_org.name}}</h1>
+            <h3>Here are some details about this Organization</h3>
+            <a href="/groups">Return Home</a>
+            <a href="/logout">Logout</a>
+            {% if one_org.creator.id == request.session.user_id %}
+            <a href="/delete/{{one_org.id}}">Delete Organization</a>
+            {% endif %}
+        </div>
+        <div class='details'>
+            {% if user in one_org.members.all %}
+            <a href="/leave/{{one_org.id}}">Leave Group</a>
+            {% else %}
+            <a href="/join/{{one_org.id}}">Join Group</a>
+            {% endif %}
+            <h3>Members:</h3>
+            <ul>
+                {% for member in one_org.members.all %}
+                <li>{{member.first_name}} {{member.last_name}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="details">
+            <h3>Organization Synopsis:</h3>
+            <h6>{{one_org.description}}</h6>
+            <h3>Creator:</h3>
+            <h4>{{one_org.creator.first_name}} {{one_org.creator.last_name}}</h4>
+        </div>
+    </div>
+
+</body>
+
+</html>

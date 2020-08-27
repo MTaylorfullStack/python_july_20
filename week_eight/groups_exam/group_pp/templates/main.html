@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Welcome to the Groups Page!</h1>
+        <div class="form">
+            <h2>Register</h2>
+            <form action="/register" method=POST>
+                {% csrf_token %}
+                <p>First Name</p>
+                <input type="text" name="first_name">
+                <p>Last Name</p>
+                <input type="text" name="last_name">
+                <p>Email</p>
+                <input type="text" name="email">
+                <p>Password</p>
+                <input type="text" name="password">
+                <input class='sub' type="submit" value="Register">
+            </form>
+        </div>
+        <div class="form">
+            <h2>Login</h2>
+            <form action="/login" method=POST>
+                {% csrf_token %}
+                <p>Email</p>
+                <input type="text" name="email">
+                <p>Password</p>
+                <input type="text" name="password">
+                <input class='sub' type="submit" value="Login">
+            </form>
+        </div>
+    </div>
+
+    
+</body>
+</html>
